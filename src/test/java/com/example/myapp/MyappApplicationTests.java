@@ -7,8 +7,8 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.boot.SpringApplication;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({SpringApplication.class})
+//@RunWith(PowerMockRunner.class)
+//@PrepareForTest({SpringApplication.class})
 public class MyappApplicationTests {
 
 	@Test

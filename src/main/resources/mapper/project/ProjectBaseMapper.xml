@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.myapp.mapper.project.ProjectBaseMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.myapp.domain.project.ProjectBase">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="clientManager" column="client_manager" jdbcType="VARCHAR"/>
+            <result property="projectManager" column="project_manager" jdbcType="VARCHAR"/>
+            <result property="initDate" column="init_date" jdbcType="DATE"/>
+            <result property="projectName" column="project_name" jdbcType="VARCHAR"/>
+            <result property="baseInfo" column="base_info" jdbcType="VARCHAR"/>
+            <result property="moneySource" column="money_source" jdbcType="VARCHAR"/>
+            <result property="mainProduct" column="main_product" jdbcType="VARCHAR"/>
+            <result property="examTime" column="exam_time" jdbcType="VARCHAR"/>
+            <result property="projectStage" column="project_stage" jdbcType="VARCHAR"/>
+            <result property="projectFrom" column="project_from" jdbcType="VARCHAR"/>
+            <result property="clientName" column="client_name" jdbcType="VARCHAR"/>
+            <result property="tenderUnit" column="tender_unit" jdbcType="VARCHAR"/>
+            <result property="tenderPerson" column="tender_person" jdbcType="VARCHAR"/>
+            <result property="tenderDept" column="tender_dept" jdbcType="VARCHAR"/>
+            <result property="useUnit" column="use_unit" jdbcType="VARCHAR"/>
+            <result property="usePerson" column="use_person" jdbcType="VARCHAR"/>
+            <result property="useDept" column="use_dept" jdbcType="VARCHAR"/>
+            <result property="predictTime" column="predict_time" jdbcType="DATE"/>
+            <result property="signUnit" column="sign_unit" jdbcType="VARCHAR"/>
+            <result property="recommend" column="recommend" jdbcType="VARCHAR"/>
+            <result property="codeNeeds" column="code_needs" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="deleteStatus" column="delete_status" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,client_manager,project_manager,
+        init_date,project_name,base_info,
+        money_source,main_product,exam_time,
+        project_stage,project_from,client_name,
+        tender_unit,tender_person,tender_dept,
+        use_unit,use_person,use_dept,
+        predict_time,sign_unit,recommend,
+        code_needs,create_time,delete_status
+    </sql>
+</mapper>

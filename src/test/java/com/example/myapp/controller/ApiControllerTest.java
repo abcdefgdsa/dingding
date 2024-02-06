@@ -5,6 +5,7 @@ import com.example.myapp.controller.model.ServiceResponse;
 import com.example.myapp.controller.model.TextModel;
 import com.example.myapp.controller.model.TopCardModel;
 import com.example.myapp.service.*;
+import com.example.myapp.service.employee.EmployeeService;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -21,7 +22,7 @@ public class ApiControllerTest {
     private final RobotInteractiveCardsService robotInteractiveCardsService = mock(RobotInteractiveCardsService.class);
     private final InteractiveCardsInstanceService interactiveCardsInstanceService =
             mock(InteractiveCardsInstanceService.class);
-    private final UserService userService = mock(UserService.class);
+    private final EmployeeService userService = mock(EmployeeService.class);
     private final ApiController apiController = new ApiController(robotGroupMessagesService,
             robotInteractiveCardsService, interactiveCardsInstanceService, userService);
 

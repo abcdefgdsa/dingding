@@ -110,7 +110,7 @@ const Home = () => {
           </div>
         </div>
       </Card>
-      <Card title={'发送文本信息'}>
+      <Card title={'发送文本信息 比如李嘉鹏是靓仔!'}>
         <Form name="basic" form={form} onFinish={handleSubmit}>
           <Form.Item name="title" rules={[{ required: false }]}>
             <Input placeholder="随便输入点什么" />
