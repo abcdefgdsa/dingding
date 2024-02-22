@@ -60,9 +60,13 @@ public class ProjectBase implements Serializable {
 
     private String signUnit;
 
-    private String recommend;
+    private String type;
 
     private String codeNeeds;
+
+    private String description;
+
+    private String file;
 
     private String createBy;
 

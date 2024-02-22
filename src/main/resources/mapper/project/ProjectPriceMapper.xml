@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.myapp.mapper.project.ProjectPriceMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.myapp.domain.project.ProjectPrice">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="baseId" column="base_id" jdbcType="INTEGER"/>
+            <result property="file" column="file" jdbcType="VARCHAR"/>
+            <result property="makeDept" column="make_dept" jdbcType="VARCHAR"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="confirmBy" column="confirm_by" jdbcType="VARCHAR"/>
+            <result property="confirmDate" column="confirm_date" jdbcType="DATE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,base_id,file,make_dept,
+        price,confirm_by,confirm_date
+    </sql>
+</mapper>

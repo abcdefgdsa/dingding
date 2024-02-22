@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.myapp.mapper.jiaofu.JiaofuMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.myapp.domain.project.approval.jiaofu.Jiaofu">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="baseId" column="base_id" jdbcType="INTEGER"/>
+            <result property="scope" column="scope" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="CHAR"/>
+            <result property="isExplicit" column="is_explicit" jdbcType="CHAR"/>
+            <result property="approvalStatus" column="approval_status" jdbcType="CHAR"/>
+            <result property="approvalBy" column="approval_by" jdbcType="VARCHAR"/>
+            <result property="approvalTime" column="approval_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,base_id,scope,
+        type,is_explicit,approval_status,
+        approval_by,approval_time
+    </sql>
+</mapper>

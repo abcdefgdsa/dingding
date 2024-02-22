@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.myapp.mapper.fangan.FanganMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.myapp.domain.project.approval.fangan.Fangan">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="baseId" column="base_id" jdbcType="INTEGER"/>
+            <result property="repeatDegree" column="repeat_degree" jdbcType="VARCHAR"/>
+            <result property="feasibility" column="feasibility" jdbcType="VARCHAR"/>
+            <result property="communication" column="communication" jdbcType="VARCHAR"/>
+            <result property="approvalStatus" column="approval_status" jdbcType="CHAR"/>
+            <result property="approvalBy" column="approval_by" jdbcType="VARCHAR"/>
+            <result property="approvalTime" column="approval_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,base_id,repeat_degree,
+        feasibility,communication,approval_status,
+        approval_by,approval_time
+    </sql>
+</mapper>

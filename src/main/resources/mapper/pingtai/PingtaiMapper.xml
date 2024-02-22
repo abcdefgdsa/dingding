@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.myapp.mapper.pingtai.PingtaiMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.myapp.domain.project.approval.pingtai.Pingtai">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="baseId" column="base_id" jdbcType="INTEGER"/>
+            <result property="isRisk" column="is_risk" jdbcType="CHAR"/>
+            <result property="version" column="version" jdbcType="VARCHAR"/>
+            <result property="isShare" column="is_share" jdbcType="CHAR"/>
+            <result property="month" column="month" jdbcType="INTEGER"/>
+            <result property="approvalStatus" column="approval_status" jdbcType="CHAR"/>
+            <result property="approvalBy" column="approval_by" jdbcType="VARCHAR"/>
+            <result property="approvalTime" column="approval_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,base_id,is_risk,
+        version,is_share,month,
+        approval_status,approval_by,approval_time
+    </sql>
+</mapper>
