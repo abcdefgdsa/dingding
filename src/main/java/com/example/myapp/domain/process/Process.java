@@ -1,78 +1,60 @@
-package com.example.myapp.domain.project.approval.shengtai;
+package com.example.myapp.domain.process;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 生态部审批
- * @TableName shengtai
+ * 审批流程
+ * @TableName process
  */
-@TableName(value ="shengtai")
+@TableName(value ="process")
 @Data
-public class Shengtai implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Process implements Serializable {
     /**
-     * 主键
+     * 主键id
      */
     @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
-     * 项目基础信息表id
+     * 项目表id
      */
     private Integer baseId;
 
     /**
-     * 项目金额
+     * 部门表id
      */
-    private BigDecimal price;
+    private String deptId;
 
     /**
-     * 项目涉及的产品及解决方案
-
+     * 部门名
      */
-    private String solution;
+    private String deptName;
 
     /**
-     * 项目背景
-     */
-    private String background;
-
-    /**
-     * 客情关系
-     */
-    private String relation;
-
-    /**
-     * 竞争态势
-     */
-    private String situation;
-
-    /**
-     * 风险点
-     */
-    private String risk;
-
-    /**
-     * 是否通过 0不通过 1通过
-     */
-    private String approvalStatus;
-
-    /**
-     * 操作人
+     * 审批人id
      */
     private String approvalBy;
 
     /**
-     * 操作时间
+     * 审批意见  3未到时间审批 2正在审批  1通过 0不通过
+     */
+    private String approvalStatus;
+
+    /**
+     * 审批时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime approvalTime;

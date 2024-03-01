@@ -6,6 +6,7 @@ import com.dingtalk.api.request.OapiV2UserGetRequest;
 import com.dingtalk.api.request.OapiV2UserGetuserinfoRequest;
 import com.dingtalk.api.response.OapiV2UserGetResponse;
 import com.dingtalk.api.response.OapiV2UserGetuserinfoResponse;
+import com.example.myapp.utils.BaseContext;
 import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +50,16 @@ public class UserService {
             UserInfo userInfo = new UserInfo();
             userInfo.setUserId(userGetByCodeResponse.getUserid());
             userInfo.setName(userGetByCodeResponse.getName());
+            userInfo.setUnionid(userGetByCodeResponse.getUnionid());
 
             String avatar = getAvatar(userGetByCodeResponse.getUserid());
             userInfo.setAvatar(avatar);
             log.info("UserService_getUserInfo get success, userid={}, avatar={}.", userInfo.getUserId(),
                     userInfo.getAvatar());
+
+            //把当前登录的userId和unionId存入threadLocal中
+            BaseContext.setCurrentUserAndUnion(userGetByCodeResponse.getUserid(), userGetByCodeResponse.getName(),userGetByCodeResponse.getUnionid());
+
             return userInfo;
         } catch (Exception e) {
             log.error("UserService_getUserInfo getSsoUserInfoWithOptions throw Exception", e);

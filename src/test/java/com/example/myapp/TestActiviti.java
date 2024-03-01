@@ -115,7 +115,7 @@ public class TestActiviti {
 //        String assingee = "李四1";
 //        String assingee = "王经理1";
 //        String assingee = "杨总经理1";
-        String assingee = "61231";
+        String assingee = "661262569";
         //        获取流程引擎
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 //        获取taskservice
@@ -153,13 +153,16 @@ public class TestActiviti {
 //        查询任务
         final List<Task> tasks = taskService.createTaskQuery()
                 .processDefinitionKey(key)
+//                .processInstanceId("cea2a013-d5e7-11ee-a96c-00ff2cf49c4a")
 //                .taskAssignee(assingee)
                 .list();
         for(Task task:tasks){
             //     根据任务id来   完成任务
+            System.out.println(task.getProcessInstanceId());
             System.out.println(task.getId());
             System.out.println(task.getName());
             System.out.println(task.getAssignee());
+            System.out.println(task.getBusinessKey());
         }
 
     }

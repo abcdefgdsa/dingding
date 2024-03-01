@@ -1,5 +1,7 @@
 package com.example.myapp.service;
 
+import com.example.myapp.exception.ApprovalException;
+import com.example.myapp.service.process.ProcessService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RuntimeService;
@@ -17,18 +19,34 @@ import java.util.List;
 public class ActivitiService {
 
 
+    @Autowired
+    public ProcessService processService;
+
+    @Autowired
+    public MsgService msgService;
+
     /**
      * 启动流程实例
      */
-    public void ProcessBoot(Integer businessKey){
-        // 1、创建ProcessEngine
+    public void ProcessBoot(Integer businessKey) throws Exception {
+
+        //1 启动流程实例
+        // 1.1、创建ProcessEngine
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-//        2、获取RunTimeService
+//        1.2、获取RunTimeService
         RuntimeService runtimeService = processEngine.getRuntimeService();
-//        3、根据流程定义Id启动流程
+//        1.3、根据流程定义Id启动流程
         org.activiti.engine.runtime.ProcessInstance processInstance = runtimeService
                 //将项目的id存入此次流程中
                 .startProcessInstanceByKey("myProject",businessKey+"");
+
+        //2 启动流程之后，对应新增流程图的表
+        processService.createProcess(businessKey);
+
+        //3 第一个是平台部审批，发消息给对应的人
+        msgService.sendMsg("0223043233301062376","平台部，您有一条项目审批的消息");
+
+
 //        输出内容
         System.out.println("流程定义id：" + processInstance.getProcessDefinitionId());
         System.out.println("流程实例id：" + processInstance.getId());
@@ -56,7 +74,7 @@ public class ActivitiService {
         if(task != null){
             //     根据任务id来   完成任务
             taskService.complete(task.getId());
-            System.out.println(task.getId()+"----任务已完成");
+            System.out.println(task.getId()+task.getName()+"----任务已完成");
         }else{
 
             //TODO 若没轮到该节点审批，则抛出异常
@@ -66,7 +84,31 @@ public class ActivitiService {
     }
 
     /**
-     * 查询所有流程目前待执行的任务,目前只考虑单个
+     * 查询项目立项审批流程目前待执行的任务,目前只考虑单个
+     */
+
+    public boolean isTimeApproval(String assingee){
+//        流程定义的Key
+        String key = "myProject";
+
+        //        获取流程引擎
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+//        获取taskservice
+        TaskService taskService = processEngine.getTaskService();
+//        查询任务
+        final List<Task> tasks = taskService.createTaskQuery()
+                .processDefinitionKey(key)
+                .taskAssignee(assingee)
+                .list();
+        if(tasks==null || tasks.isEmpty()){
+            return false;
+        }
+        return true;
+
+    }
+
+    /**
+     * 查询项目立项审批流程目前待执行的任务,目前只考虑单个
      */
 
     public void queryTask(){

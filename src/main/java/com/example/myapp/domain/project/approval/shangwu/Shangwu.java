@@ -41,7 +41,7 @@ public class Shangwu implements Serializable {
 
     /**
      * 首付
-     */
+     */;
     private Integer first;
 
     /**

@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.myapp.domain.project.approval.quyu.Quyu;
 import com.example.myapp.service.project.approval.quyu.QuyuService;
 import com.example.myapp.mapper.quyu.QuyuMapper;
+import com.example.myapp.utils.BaseContext;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 /**
  *
@@ -16,11 +19,15 @@ public class QuyuServiceImpl extends ServiceImpl<QuyuMapper, Quyu>
 
     @Override
     public boolean addApproval(Quyu quyu) {
+        quyu.setApprovalBy(BaseContext.getCurrentUserAndUnion().getUserId());
+        quyu.setApprovalTime(LocalDateTime.now());
         return save(quyu);
     }
 
     @Override
     public boolean updateApproval(Quyu quyu) {
+        quyu.setApprovalBy(BaseContext.getCurrentUserAndUnion().getUserId());
+        quyu.setApprovalTime(LocalDateTime.now());
         return updateById(quyu);
     }
 

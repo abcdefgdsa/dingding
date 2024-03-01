@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.myapp.domain.project.ProjectBase;
 import com.example.myapp.service.project.ProjectBaseService;
 import com.example.myapp.mapper.project.ProjectBaseMapper;
+import com.example.myapp.utils.BaseContext;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class ProjectBaseServiceImpl extends ServiceImpl<ProjectBaseMapper, Proje
     public boolean addBase(ProjectBase projectBase) {
         projectBase.setCreateTime(LocalDateTime.now());
         //TODO 把员工的id也赋值进去
+//        projectBase.setCreateBy(BaseContext.getCurrentUserAndUnion().getUserId());
         return save(projectBase);
     }
 

@@ -5,6 +5,7 @@ import com.example.myapp.controller.interceptor.TokenRequired;
 import com.example.myapp.domain.AjaxResult;
 import com.example.myapp.domain.project.ProjectBase;
 import com.example.myapp.domain.project.ProjectPrice;
+import com.example.myapp.service.ActivitiService;
 import com.example.myapp.service.project.ProjectBaseService;
 import com.example.myapp.service.project.ProjectPriceService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class ProjectPriceController {
     @Autowired
     public ProjectPriceService projectPriceService;
 
+
     /**
      * 查询报价信息
      * @return
@@ -38,6 +40,9 @@ public class ProjectPriceController {
     @PostMapping("/addPrice")
     public AjaxResult addPrice(@RequestBody ProjectPrice projectPrice) {
         boolean flag = projectPriceService.addPrice(projectPrice);
+
+
+
         if(flag)
             return AjaxResult.success("报价添加成功");
         return AjaxResult.error("报价添加失败");
@@ -60,6 +65,8 @@ public class ProjectPriceController {
     @PutMapping("/updatePrice")
     public AjaxResult updatePrice(@RequestBody ProjectPrice projectPrice) {
         boolean flag = projectPriceService.updatePrice(projectPrice);
+
+
         if(flag)
             return AjaxResult.success("更新报价信息成功");
         return AjaxResult.error("更新报价信息失败");

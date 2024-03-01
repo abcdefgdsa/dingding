@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.myapp.domain.project.approval.shangwu.Shangwu;
 import com.example.myapp.service.project.approval.shangwu.ShangwuService;
 import com.example.myapp.mapper.shangwu.ShangwuMapper;
+import com.example.myapp.utils.BaseContext;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 /**
  *
@@ -16,11 +19,15 @@ public class ShangwuServiceImpl extends ServiceImpl<ShangwuMapper, Shangwu>
 
     @Override
     public boolean addApproval(Shangwu shangwu) {
+        shangwu.setApprovalBy(BaseContext.getCurrentUserAndUnion().getUserId());
+        shangwu.setApprovalTime(LocalDateTime.now());
         return save(shangwu);
     }
 
     @Override
     public boolean updateApproval(Shangwu shangwu) {
+        shangwu.setApprovalBy(BaseContext.getCurrentUserAndUnion().getUserId());
+        shangwu.setApprovalTime(LocalDateTime.now());
         return updateById(shangwu);
     }
 

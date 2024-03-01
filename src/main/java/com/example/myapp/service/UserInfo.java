@@ -20,4 +20,9 @@ public class UserInfo {
 
     private String avatar;
 
+    /**
+     * 部门id
+     */
+    private String unionid;
+
 }

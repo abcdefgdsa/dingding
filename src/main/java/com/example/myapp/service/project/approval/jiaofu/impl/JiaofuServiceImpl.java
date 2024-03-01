@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.myapp.domain.project.approval.jiaofu.Jiaofu;
 import com.example.myapp.service.project.approval.jiaofu.JiaofuService;
 import com.example.myapp.mapper.jiaofu.JiaofuMapper;
+import com.example.myapp.utils.BaseContext;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 /**
  *
@@ -16,11 +19,17 @@ public class JiaofuServiceImpl extends ServiceImpl<JiaofuMapper, Jiaofu>
 
     @Override
     public boolean addApproval(Jiaofu jiaofu) {
+
+        jiaofu.setApprovalBy(BaseContext.getCurrentUserAndUnion().getUserId());
+        jiaofu.setApprovalTime(LocalDateTime.now());
         return save(jiaofu);
     }
 
     @Override
     public boolean updateApproval(Jiaofu jiaofu) {
+
+        jiaofu.setApprovalBy(BaseContext.getCurrentUserAndUnion().getUserId());
+        jiaofu.setApprovalTime(LocalDateTime.now());
         return updateById(jiaofu);
     }
 

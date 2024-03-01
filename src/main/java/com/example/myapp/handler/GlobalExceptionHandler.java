@@ -25,6 +25,6 @@ public class GlobalExceptionHandler {
         log.error(ex.getMessage());
 
 //        return AjaxResult.error(ex.getMessage());
-        return AjaxResult.error("还没到你审批");
+        return AjaxResult.error("上个部门还未审批通过，未到您审批！");
     }
 }

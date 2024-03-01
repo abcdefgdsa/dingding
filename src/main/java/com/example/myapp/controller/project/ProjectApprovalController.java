@@ -4,6 +4,7 @@ package com.example.myapp.controller.project;
 import com.example.myapp.controller.interceptor.TokenRequired;
 import com.example.myapp.domain.AjaxResult;
 import com.example.myapp.domain.project.ProjectApproval;
+import com.example.myapp.service.ActivitiService;
 import com.example.myapp.service.project.ProjectApprovalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class ProjectApprovalController {
     @Autowired
     public ProjectApprovalService projectApprovalService;
 
+    @Autowired
+    public ActivitiService activitiService;
+
     /**
      * 查询评审信息
      * @return
@@ -34,8 +38,12 @@ public class ProjectApprovalController {
      * 新增评审信息
      */
     @PostMapping("/addApproval")
-    public AjaxResult addApproval(@RequestBody ProjectApproval projectApproval) {
+    public AjaxResult addApproval(@RequestBody ProjectApproval projectApproval) throws Exception {
         boolean flag = projectApprovalService.addApproval(projectApproval);
+
+        //评审后开启审批流程，并把项目基本表id存入流程数据库中
+        activitiService.ProcessBoot(projectApproval.getBaseId());
+
         if(flag)
             return AjaxResult.success("评审添加成功");
         return AjaxResult.error("评审添加失败");
