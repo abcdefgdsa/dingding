@@ -136,6 +136,25 @@ public class TestActiviti {
     }
 
     /**
+     * 根据流程实例id删除实例
+     */
+    @Test
+    public void dropInstance(){
+        //        1、得到引擎
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+
+// 获取RuntimeService
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+
+// 获取流程实例的ID
+        String processInstanceId = "2063f923-d9fd-11ee-92bc-00ff2cf49c4a";
+
+// 删除流程实例
+        runtimeService.deleteProcessInstance(processInstanceId, "删除原因");
+
+    }
+
+    /**
      * 查询当前流程
      */
     @Test
@@ -156,6 +175,7 @@ public class TestActiviti {
 //                .processInstanceId("cea2a013-d5e7-11ee-a96c-00ff2cf49c4a")
 //                .taskAssignee(assingee)
                 .list();
+
         for(Task task:tasks){
             //     根据任务id来   完成任务
             System.out.println(task.getProcessInstanceId());

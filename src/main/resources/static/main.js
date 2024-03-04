@@ -1,3 +1,4 @@
+/*
 const { Button, Form, Input, Card, Toast, Divider } = antd;
 
 const Home = () => {
@@ -151,3 +152,4 @@ const Home = () => {
 };
 const container = document.getElementById('root');
 ReactDOM.render(<Home />, container);
+*/

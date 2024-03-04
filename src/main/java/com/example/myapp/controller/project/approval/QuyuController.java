@@ -58,7 +58,7 @@ public class QuyuController {
         MyValues myValues = BaseContext.getCurrentUserAndUnion();
 
         //如果目前该部门没有任务（目前只考虑单个任务），则抛出异常
-        if(!activitiService.isTimeApproval(myValues.getUnionId()))
+        if(!activitiService.isTimeApproval(myValues.getUnionId(),quyu.getBaseId()))
             throw new ApprovalException("没到时间审批");
 
         //审批
@@ -75,7 +75,7 @@ public class QuyuController {
 
         //若审批结果为同意，则流程进行到下一步
         if("1".equals(quyu.getApprovalStatus())) {
-            activitiService.completTask(myValues.getUnionId());
+            activitiService.completTask(myValues.getUnionId(),quyu.getBaseId());
             //若审批同意，则发消息给产品部审批
             msgService.sendMsg("0223043233301062376", "生态部，您有一条项目审批的消息");
         }
@@ -110,7 +110,7 @@ public class QuyuController {
 
         //若审批结果为同意，则流程进行到下一步
         if("1".equals(quyu.getApprovalStatus())) {
-            activitiService.completTask(myValues.getUnionId());
+            activitiService.completTask(myValues.getUnionId(),quyu.getBaseId());
             //若审批同意，则发消息给产品部审批
             msgService.sendMsg("0223043233301062376", "生态部，您有一条项目审批的消息");
         }

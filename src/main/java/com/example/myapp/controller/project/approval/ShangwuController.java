@@ -56,7 +56,7 @@ public class ShangwuController {
         MyValues myValues = BaseContext.getCurrentUserAndUnion();
 
         //如果目前该部门没有任务（目前只考虑单个任务），则抛出异常
-        if(!activitiService.isTimeApproval(myValues.getUnionId()))
+        if(!activitiService.isTimeApproval(myValues.getUnionId(),shangwu.getBaseId()))
             throw new ApprovalException("没到时间审批");
 
         //审批
@@ -73,7 +73,7 @@ public class ShangwuController {
 
         //若审批结果为同意，则流程进行到下一步
         if("1".equals(shangwu.getApprovalStatus())) {
-            activitiService.completTask(myValues.getUnionId());
+            activitiService.completTask(myValues.getUnionId(),shangwu.getBaseId());
             //若审批同意，则发消息给产品部审批
             msgService.sendMsg("0223043233301062376", "唉xioxio，你滴任务完成辣");
         }
@@ -107,7 +107,7 @@ public class ShangwuController {
 
         //若审批结果为同意，则流程进行到下一步
         if("1".equals(shangwu.getApprovalStatus())) {
-            activitiService.completTask(myValues.getUnionId());
+            activitiService.completTask(myValues.getUnionId(),shangwu.getBaseId());
             //若审批同意，则发消息给产品部审批
             msgService.sendMsg("0223043233301062376", "唉xioxio，你滴任务完成辣");
         }

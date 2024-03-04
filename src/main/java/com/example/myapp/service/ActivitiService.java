@@ -1,6 +1,8 @@
 package com.example.myapp.service;
 
+import com.example.myapp.domain.instance.ProjectInstance;
 import com.example.myapp.exception.ApprovalException;
+import com.example.myapp.service.instance.ProjectInstanceService;
 import com.example.myapp.service.process.ProcessService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
@@ -25,6 +27,11 @@ public class ActivitiService {
     @Autowired
     public MsgService msgService;
 
+    @Autowired
+    public ProjectInstanceService projectInstanceService;
+
+
+
     /**
      * 启动流程实例
      */
@@ -46,6 +53,9 @@ public class ActivitiService {
         //3 第一个是平台部审批，发消息给对应的人
         msgService.sendMsg("0223043233301062376","平台部，您有一条项目审批的消息");
 
+        //将项目id和流程实例id的映射存入数据库中
+        projectInstanceService.addInstance(new ProjectInstance(null,businessKey,processInstance.getId()));
+
 
 //        输出内容
         System.out.println("流程定义id：" + processInstance.getProcessDefinitionId());
@@ -56,7 +66,8 @@ public class ActivitiService {
     /**
      * 完成个人任务，这里的参数表示部门id
      */
-    public void completTask(String assingee){
+    public void completTask(String assingee,Integer baseId){
+        ProjectInstance projectInstance = projectInstanceService.selectByBaseId(baseId);
 //        流程定义的Key
         String key = "myProject";
 //        任务负责人
@@ -69,7 +80,9 @@ public class ActivitiService {
         Task task = taskService.createTaskQuery()
                 .processDefinitionKey(key)
                 .taskAssignee(assingee)
-                //todo  目前只考虑一个项目,多个项目需要审批时要做区分
+                //根据流程实例id来区分不同的流程
+                .processInstanceId(projectInstance.getInstanceId())
+                //  目前只考虑一个项目,多个项目需要审批时要做区分
                 .singleResult();
         if(task != null){
             //     根据任务id来   完成任务
@@ -87,7 +100,9 @@ public class ActivitiService {
      * 查询项目立项审批流程目前待执行的任务,目前只考虑单个
      */
 
-    public boolean isTimeApproval(String assingee){
+    public boolean isTimeApproval(String assingee,Integer baseId){
+
+        ProjectInstance projectInstance = projectInstanceService.selectByBaseId(baseId);
 //        流程定义的Key
         String key = "myProject";
 
@@ -98,6 +113,8 @@ public class ActivitiService {
 //        查询任务
         final List<Task> tasks = taskService.createTaskQuery()
                 .processDefinitionKey(key)
+                //根据流程实例id来区分不同的流程
+                .processInstanceId(projectInstance.getInstanceId())
                 .taskAssignee(assingee)
                 .list();
         if(tasks==null || tasks.isEmpty()){
